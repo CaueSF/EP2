@@ -11,3 +11,4 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
             lugar = [linha, coluna + pos]
             posicoes.append(lugar)
     return posicoes
+#teste
