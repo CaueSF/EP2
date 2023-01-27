@@ -19,3 +19,11 @@ def preenche_frota(info_frota, nome_navio, linha, coluna, orientacao, tamanho):
     else:
         info_frota[nome_navio].append(define_posicoes(linha, coluna, orientacao, tamanho))
     return info_frota
+
+# FAZ JOGADA
+def faz_jogada(tabuleiro, linha, coluna):
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'
+    if tabuleiro[linha][coluna] == 0:
+        tabuleiro[linha][coluna] = '-'
+    return tabuleiro
