@@ -27,3 +27,27 @@ def faz_jogada(tabuleiro, linha, coluna):
     if tabuleiro[linha][coluna] == 0:
         tabuleiro[linha][coluna] = '-'
     return tabuleiro
+
+# POSICIONA FROTA
+def posiciona_frota(info_navios):
+    tabuleiro = [
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+  ]
+    for nomes in info_navios:
+        listao = info_navios[nomes]
+        for lista in listao:
+            for i in lista:
+                print(i)
+                linha = i[0]
+                coluna = i[1]
+                tabuleiro[linha][coluna] = 1
+    return tabuleiro
