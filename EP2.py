@@ -1,3 +1,4 @@
+import random
 # DEFINE POSIÇÕES
 def define_posicoes(linha, coluna, orientacao, tamanho):
     posicoes = []
@@ -201,6 +202,7 @@ frota_oponente = {
 tabuleiro_meu = posiciona_frota(frota)
 tabuleiro_oponente = posiciona_frota(frota_oponente)
 posicoes_usadas = []
+posicoes_usadas_oponente = []
 numeros = '0123456789'
 
 jogando = True
@@ -222,12 +224,15 @@ while jogando:
                 print('Coluna inválida!')
             else:
                 coluna_certa = False
+        achou = False
         for i in range(len(posicoes_usadas)):
             j = posicoes_usadas[i]
             if int(escolhe_linha) == j[0] and int(escolhe_coluna) == j[1]:
                 print('A posição linha {0} e coluna {1} já foi informada anteriormente!'.format(j[0], j[1]))
+                achou = True
                 break
-        validacao = False
+        if not achou:
+            validacao = False
     posicoes_usadas.append([int(escolhe_linha), int(escolhe_coluna)])
 
     tabuleiro_oponente = faz_jogada(tabuleiro_oponente, int(escolhe_linha), int(escolhe_coluna))
@@ -236,3 +241,27 @@ while jogando:
     if qtd_afundados == 10:
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
+
+#JOGADAS DO OPONENTE
+    else:
+        validacao = True
+        while validacao:
+            linha_oponente = random.randint(0, 9)
+            coluna_oponente = random.randint(0, 9)
+            achou = False
+            for i in range(len(posicoes_usadas_oponente)):
+                j = posicoes_usadas_oponente[i]
+                if linha_oponente == j[0] and coluna_oponente == j[1]:
+                    achou = True
+                    break
+            if not achou:
+                validacao = False
+                print('Seu oponente está atacando na linha {0} e coluna {1}'.format(linha_oponente, coluna_oponente))
+        posicoes_usadas_oponente.append([linha_oponente, coluna_oponente])
+
+        tabuleiro_meu = faz_jogada(tabuleiro_meu, linha_oponente, coluna_oponente)
+
+        qtd_afundados_meu = afundados(frota, tabuleiro_meu)
+        if qtd_afundados_meu == 10:
+            print('Xi! O oponente derrubou toda a sua frota =(')
+            jogando = False
