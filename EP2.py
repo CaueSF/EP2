@@ -53,13 +53,6 @@ def posiciona_frota(info_navios):
 
 # QUANTAS EMBARCAÇÕES AFUNDADAS
 def afundados(info_navios, tabuleiro):
-    for nomes in info_navios:
-        listao = info_navios[nomes]
-        for lista in listao:
-            for i in lista:
-                linha = i[0]
-                coluna = i[1]
-
     afundou = 0
     for nomes in info_navios:
         listao = info_navios[nomes]
@@ -74,3 +67,27 @@ def afundados(info_navios, tabuleiro):
             if x == tamanho:
                 afundou += 1
     return afundou
+
+#POSIÇÃO VÁLIDA
+def posicao_valida(info_frota, linha, coluna, orientacao, tamanho):
+    def_pos = define_posicoes(linha, coluna, orientacao, tamanho)
+    for i in def_pos:
+        linha2 = i[0]
+        coluna2 = i[1]
+        if linha2 < 0 or linha2 > 9:
+            return False
+        if coluna2 < 0 or coluna2 > 9:
+            return False
+    for i in def_pos:
+        linha2 = i[0]
+        coluna2 = i[1]
+
+        for nomes in info_frota:
+            x = info_frota[nomes]
+            for y in x:
+                for z in range(len(y)):
+                    linha3 = y[z][0]
+                    coluna3 = y[z][1]
+                    if linha3 == linha2 and coluna3 == coluna2:
+                        return False
+    return True
